@@ -11,8 +11,8 @@ function TestSlide({ products }) {
 
   // const displayedProducts =  products.slice(0, 5);
   const displayedProducts = [...products].sort(
-    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-  );
+    (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+  ).slice(0, 5);
 
   return (
     <div

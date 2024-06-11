@@ -79,51 +79,26 @@ exports.signup = async (req, res) => {
       name,
       email,
       password,
-      confirmPassword,
       contactNumber,
-      refer: referralCodeFromRequest = false,
     } = req.body;
 
-    console.log(referralCodeFromRequest)
+  
 
     // Check if All Details are there or not
-    if (!name || !email || !password || !confirmPassword ||!contactNumber) {
+    if (!name || !email || !password || !contactNumber) {
       return res.status(403).send({
         success: false,
         message: "All Fields are required",
       });
     }
 
-    // Check if password and confirm password match
-    if (password !== confirmPassword) {
-      return res.status(400).json({
-        success: false,
-        message: "Password and Confirm Password do not match. Please try again.",
-      });
-    }
+
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
 
-    let referredBy = null;
-  
-    let referringUser
-    // If referral code is provided in the request body
-    if (referralCodeFromRequest) {
-      // Find the user who referred by the provided referral code
-      console.log(referralCodeFromRequest)
-     referringUser = await User.findOne({ referralCode: referralCodeFromRequest });
-      if (referringUser) {
-        referredBy = referringUser._id; // Set referredBy to the ID of the referring user
-       
-       
-      }
-    }
 
-
-    // Generate unique referral code
-    const referralCode = await generateUniqueReferralCode(name);
 
     // Create user in the database
     const user = await User.create({
@@ -132,19 +107,11 @@ exports.signup = async (req, res) => {
       contactNumber,
       password: hashedPassword,
       image: `https://api.dicebear.com/5.x/initials/svg?seed=${name} `,
-      referralCode: referralCode,
-      referralBy: referredBy,
+    
     });
 
 
-if(referringUser){
-   // Update the referring user's network to include the referred user's details
-   referringUser.network.push({
-    id:user._id,
-    referralCode:referralCodeFromRequest
-   });
- await referringUser.save();
-}
+
 
     // console.log(user)
     // Log in the user after signup

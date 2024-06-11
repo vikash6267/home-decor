@@ -59,13 +59,13 @@ function Navbar({ isOpen, setIsOpen }) {
     <AnimatePresence>
       {isOpen && (
         <div
-          className={`fixed top-0 left-0 right-0 bottom-0 z-40 overflow-hidden uppercase `}
+          className={`fixed top-0 left-0 right-0 bottom-0 z-40 overflow-scroll uppercase `}
         >
           <Backdrop onClick={handleClose} />
           <motion.div
             id="navbar"
             ref={ref}
-            className="fixed top-0 left-0 bottom-0 lg:w-[350px] w-[270px] bg-white p-6 z-40 border-r-2 shadow-2xl"
+            className="fixed top-0 left-0 bottom-0 lg:w-[350px] w-[300px] bg-white p-6 z-40 border-r-2 shadow-lg"
             initial={{ x: "-100%", opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: "-100%", opacity: 0 }}
@@ -83,10 +83,10 @@ function Navbar({ isOpen, setIsOpen }) {
                   />
                   <div className="flex items-center mt-4" data-aos="fade-up" data-aos-delay="100">
                     <div className="mr-2">{icon}</div>
-                    <div className="text-2xl font-semibold">{greeting}</div>
+                    <div className="text-lg font-semibold">{greeting}</div>
                   </div>
                   {user && (
-                    <div className="mt-2 text-xl text-gray-700" data-aos="fade-up" data-aos-delay="200">{user.name}</div>
+                    <div className="mt-2 text-lg text-gray-700" data-aos="fade-up" data-aos-delay="200">{user.name}</div>
                   )}
                 </div>
                 
@@ -125,12 +125,12 @@ function Navbar({ isOpen, setIsOpen }) {
     </Link>
   )}
 </div>
-<ul className="flex flex-col w-full mt-4 gap-6  ">
+<ul className="flex flex-col w-full  gap-3   ">
   {NavbarLinks.map((link, index) => (
     <Link
       key={index}
       to={link.path}
-      className=" transition-colors duration-300 hover:text-blue-600 border-b-2 border-gray-300 text-xl py-2 mb2"
+      className=" transition-colors duration-300 hover:text-blue-600 border-b-2 border-gray-300 text-lg py-1"
       onClick={() => dispatch(setIsOpen(false))}
       data-aos="fade-up"
       data-aos-delay={`${200 + index * 50}`}

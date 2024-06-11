@@ -16,7 +16,8 @@ const { cart } = useSelector( (state) => state.cart
 
 
 
-const paymentHandle = ({payable}) =>{
+const paymentHandle = () =>{
+
   BuyProduct (token,
        cart,
     coupon,

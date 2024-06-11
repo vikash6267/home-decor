@@ -19,7 +19,7 @@ import Profile from './pages/Profile';
 import ProductDetails from './pages/ProductDetails';
 import AllProduct from './pages/AllProduct';
 import CheckoutForm from './components/core/cart/CheckoutForm';
-
+import Order from './pages/MyOrder';
 
 
 
@@ -59,7 +59,14 @@ const dispatch = useDispatch()
             </OpenRoute>
           }
         />
-
+    <Route
+          path="order"
+          element={
+            <PrivateRoute>
+              <Order />
+            </PrivateRoute>
+          }
+        />
 
         
 <Route
@@ -75,6 +82,7 @@ const dispatch = useDispatch()
 
 
 {checkout && (
+  <PrivateRoute>
       
           <Modal
             show={checkout}
@@ -82,6 +90,8 @@ const dispatch = useDispatch()
           >
             <CheckoutForm  handleClose={() => dispatch(setCheckout(false))} />
           </Modal>
+          </PrivateRoute>
+
         
       )}
 

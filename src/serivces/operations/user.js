@@ -1,10 +1,10 @@
 import { toast } from "react-hot-toast"
-import { setLoading, setToken } from "../../slices/authSlice"
-import { resetCart } from "../../slices/cartSlice"
-import { setUser } from "../../slices/profileSlice"
+import { setLoading, setToken } from "../../redux/slices/authSlice"
+import { resetCart } from "../../redux/slices/cartSlice"
+import { setUser } from "../../redux/slices/profileSlice"
 import { apiConnector } from "../apiConnector"
 import { userEndpoints } from "../apis"
-import { resetWishlist } from "../../slices/wishListSlice"
+import { resetWishlist } from "../../redux/slices/wishListSlice"
 const {
   SEND_OTP_API,
   VERIFY_OTP_API,
@@ -17,79 +17,7 @@ const {
 
 
 
-export function sendOtp(email, navigate) {
-  return async (dispatch) => {
-    const toastId = toast.loading("Loading...")
-    dispatch(setLoading(true))
-    let result = []
 
-    try {
-      const response = await apiConnector("POST", SEND_OTP_API, {
-        email
-      })
-      // console.log("SENDOTP API RESPONSE............", response)
-
-      // console.log(response.data.success)
-      result = response.data.success
-      if (!response.data.success) {
-        throw new Error(response.data.message)
-      }
-
-      toast.success("OTP Sent Successfully")
-      // navigate("/verify-email")
-    } catch (error) {
-      console.log("SENDOTP API ERROR............", error)
-      toast.error("Could Not Send OTP")
-      return result
-    }
-    dispatch(setLoading(false))
-    toast.dismiss(toastId)
-    return result
-
-  }
-}
-
-
-
-export function compareOtp(otp, email, navigate) {
-  return async (dispatch) => {
-    const toastId = toast.loading("Loading...")
-    dispatch(setLoading(true))
-    let result = []
-    try {
-      const response = await apiConnector("POST", VERIFY_OTP_API, {
-        otp, email
-      })
-      console.log("Compare API RESPONSE............", response)
-
-
-      if (!response.data.success) {
-        throw new Error(response.data.message)
-      }
-
-      if (response.data.userFind) {
-        console.log(response.data.token)
-        dispatch(setToken(response.data.token))
-        dispatch(setUser(response.data.existingUser))
-        localStorage.setItem("user", JSON.stringify(response.data.existingUser))
-
-        localStorage.setItem("token", JSON.stringify(response.data.token))
-        navigate("/profile")
-
-
-      }
-      result = response?.data?.userFind
-
-      toast.success("Login Succesfully")
-      // navigate("/verify-email")
-    } catch (error) {
-      console.log("SENDOTP API ERROR............", error)
-      toast.error("Could Not Send OTP")
-    }
-    dispatch(setLoading(false))
-    toast.dismiss(toastId)
-  }
-}
 
 export function signUp(
   formData,
@@ -112,7 +40,7 @@ export function signUp(
       localStorage.setItem("user", JSON.stringify(response.data.user))
 
       localStorage.setItem("token", JSON.stringify(response.data.token))
-      navigate("/profile")
+      // navigate("/profile")
 
 
       toast.success("Login Successful")
@@ -127,7 +55,38 @@ export function signUp(
   }
 }
 
+export function login(email, password, navigate) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading...")
+    dispatch(setLoading(true))
+    try {
+      const response = await apiConnector("POST", LOGIN_API, {
+        email,
+        password,
+      })
 
+      // console.log("LOGIN API RESPONSE............", response)
+
+      if (!response.data.success) {
+        throw new Error(response.data.message)
+      }
+
+      toast.success("Login Successful")
+      dispatch(setToken(response.data.token))
+      dispatch(setUser(response.data.user))
+      localStorage.setItem("user", JSON.stringify(response.data.user))
+
+      localStorage.setItem("token", JSON.stringify(response.data.token))
+      // navigate("/profile")
+   
+    } catch (error) {
+      console.log("LOGIN API ERROR............", error)
+      toast.error("Login Failed")
+    }
+    dispatch(setLoading(false))
+    toast.dismiss(toastId)
+  }
+}
 
 export function fetchMyProfile(token) {
 
@@ -159,91 +118,7 @@ export function fetchMyProfile(token) {
   }
 }
 
-// Address
 
-export function addAddress(
-  formData,
-  token
-) {
-  console.log(token)
-  return async (dispatch) => {
-    const toastId = toast.loading("Loading...")
-    dispatch(setLoading(true))
-    try {
-      const response = await apiConnector("POST", ADD_ADDRESS, formData, {
-        Authorization: `Bearer ${token}`,
-      })
-
-      console.log("ADD ADRESS API RESPONSE............", response)
-
-      if (!response.data.success) {
-        throw new Error(response.data.message)
-      }
-      console.log(response.data)
-
-      const existingUser = JSON.parse(localStorage.getItem("user")) || {};
-
-      const newAddress = response.data.address;
-      let updatedAddresses;
-
-      if (newAddress.isDefault) {
-        // Set all existing addresses to isDefault: false
-        updatedAddresses = existingUser.addresses.map(address => ({ ...address, isDefault: false }));
-      } else {
-        // Keep existing addresses as they are
-        updatedAddresses = [...existingUser.addresses];
-      }
-
-      // Add the new address
-      updatedAddresses.push(newAddress);
-
-      const updatedUser = {
-        ...existingUser,
-        addresses: updatedAddresses
-      };
-
-
-      console.log(updatedUser)
-
-      dispatch(setUser(updatedUser))
-
-      localStorage.setItem("user", JSON.stringify(updatedUser))
-
-      toast.success("Address Successful")
-
-    } catch (error) {
-      console.log("Address API ERROR............", error)
-      toast.error("Address Add Failed")
-      // navigate("/login")
-    }
-    dispatch(setLoading(false))
-    toast.dismiss(toastId)
-  }
-}
-
-export async function referCodeKnow(refer) {
-  const toastId = toast.loading("Loading...");
-  let result = [];
-
-  try {
-    const response = await apiConnector("POST", REFER_CODE, { refer });
-
-
-    if (!response.data.success) {
-      throw new Error(response.data.message);
-    }
-
-    // console.log(response.user);
-
-    result = response.data.user;
-    // navigate("/verify-email") // Assuming you want to navigate somewhere after success
-  } catch (error) {
-    console.log("REFER API ERROR:", error);
-  }
-
-  toast.dismiss(toastId);
-  return result; // Returning the result of the asynchronous operation
-}
 
 
 

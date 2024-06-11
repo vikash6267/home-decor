@@ -11,7 +11,6 @@ import { IoIosAdd,IoIosRemove  } from "react-icons/io";
 import { MdOutlineLocalShipping } from "react-icons/md";
 import {addToCart} from "../redux/slices/cartSlice"
 import { useDispatch, useSelector } from "react-redux";
-import { addToWish , removeFromWish,fetchWishlist} from "../serivces/operations/product";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 
@@ -44,33 +43,9 @@ const toggleModal = () => {
 // console.log("Redux Wishlist",wishlistProduct)
 // },[])
 
-useEffect(() => {
-  const fetchWishlistData = async () => {
-    try {
-      const res = await fetchWishlist(token,dispatch);
-  console.log("hello")
 
-      // console.log(res.wishlist)
-    } catch (error) {
-      console.error("Error fetching wishlist:", error);
-    }
-  };
 
- if(token){
-  fetchWishlistData();
- }
-}, [token,removeFromWish, addToWish]);
 
-const handleAddToWishlist = async (productId,token) => {
-
-  addToWish(productId,token,dispatch);
-  setWishlistLoading(true);
-};
-
-const handleRemoveFromWishlist = async (productId,token) => {
-removeFromWish(productId,token,dispatch);
-  setWishlistLoading(true);
-};
 
 
   

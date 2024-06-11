@@ -120,7 +120,7 @@ const paymentVerification = async (req, res) => {
     const address = req.body?.address
     const payable = req.body?.payable
   
-  // const userId = req.user.id
+  const userId = req.user.id
 
     let body = razorpay_order_id + "|" + razorpay_payment_id
 
@@ -132,7 +132,7 @@ const paymentVerification = async (req, res) => {
       if (expectedSignature === razorpay_signature) {
         try {
           // Call the createOrder function
-          // await createOrder(product, userId, address, razorpay_order_id, razorpay_payment_id, payable, res);
+          await createOrder(product, userId, address, razorpay_order_id, razorpay_payment_id, payable, res);
       
           // Send the response after the order is successfully created
           return res.status(200).json({ success: true, message: "Payment Verified" });
