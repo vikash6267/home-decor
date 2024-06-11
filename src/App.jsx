@@ -17,7 +17,12 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import ProductDetails from './pages/ProductDetails';
+import AllProduct from './pages/AllProduct';
 import CheckoutForm from './components/core/cart/CheckoutForm';
+
+
+
+
 //API
 import { getAllProduct } from "./serivces/operations/product";
 import { useEffect } from 'react';
@@ -41,6 +46,7 @@ const dispatch = useDispatch()
 <Routes >
 
 <Route path="/" element={<Home />} />
+<Route path="/allProduct" element={<AllProduct />} />
 <Route path="product/:productID" element={<ProductDetails />} />
 
 
