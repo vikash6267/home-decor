@@ -129,7 +129,7 @@ function Home() {
             
             
               {products &&
-                products2?.map((product) => (
+                products?.map((product) => (
                   <ProductCard key={product._id} products={product} />
                 ))}
             </div>
