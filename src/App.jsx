@@ -46,7 +46,7 @@ const dispatch = useDispatch()
 <Routes >
 
 <Route path="/" element={<Home />} />
-<Route path="/allProduct" element={<AllProduct />} />
+{/* <Route path="/allProduct" element={<AllProduct />} /> */}
 <Route path="product/:productID" element={<ProductDetails />} />
 
 
