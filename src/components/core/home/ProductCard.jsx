@@ -38,12 +38,12 @@ function ProductCard({ products }) {
           <div className="flex justify-center items-center">
             <div className="relative flex justify-center items-center">
               <img
-                src={images[0].url}
+                src={images[0]?.url}
                 alt={title}
                 className=" transition duration-1000 ease-in-out transform hover:-translate-y-1 hover:scale-110"
               />
               <img
-                src={images[1].url}
+                src={images[1]?.url}
                 alt={title}
                 className=" absolute top-0 left-0 opacity-0 transition duration-1000 ease-in-out transform hover:opacity-100"
               />

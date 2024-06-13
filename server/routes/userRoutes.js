@@ -1,33 +1,27 @@
 // Import the required modules
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
+
+const {
+  login,
+  signup,
+
+  fetchMyProfile,
+} = require("../controllers/Auth");
 
 const{
-    login,
-    signup,
-   
-    fetchMyProfile
-} = require("../controllers/Auth")
+  contactUsController
+} = require("../controllers/ContactUs")
 
-const{
-    referCode
-} = require("../controllers/referCodeKnow")
-const{
-    auth,
-    isCustomre
-} = require("../middlewares/auth")
+const { auth, isCustomre } = require("../middlewares/auth");
 
-router.post("/login", login)
+router.post("/login", login);
+
+router.post("/signup", signup);
+
+router.get("/fetchMyProfile", auth, fetchMyProfile);
 
 
-router.post("/signup", signup)
-router.post("/refer", referCode)
+router.post("/contact", contactUsController)
 
-
-
-router.get("/fetchMyProfile",auth,fetchMyProfile )
-
-
-
-
-module.exports = router
+module.exports = router;

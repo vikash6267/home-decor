@@ -37,12 +37,12 @@ function TestSlide({ products }) {
             >
               <div>
                 <img
-                  src={product.images[0].url}
+                  src={product?.images[0]?.url}
                   alt=""
                   className="object-cover h-full w-full transition duration-500 ease-in-out transform hover:-translate-y-1 "
                 />
                 <img
-                  src={product.images[1].url}
+                  src={product?.images[1]?.url}
                   alt=""
                   className="object-cover h-full w-full absolute top-0 left-0 opacity-0 transition duration-500 ease-in-out transform hover:opacity-100 hover:scale-105"
                 />
@@ -56,7 +56,7 @@ function TestSlide({ products }) {
               </p>
               <p className="font-montserrat text-[14px] text-gray-600 ">
                 {" "}
-                {displayMoney(product.price)}
+                {displayMoney(product?.price)}
               </p>
             
             </div>

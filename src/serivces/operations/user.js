@@ -6,13 +6,9 @@ import { apiConnector } from "../apiConnector"
 import { userEndpoints } from "../apis"
 import { resetWishlist } from "../../redux/slices/wishListSlice"
 const {
-  SEND_OTP_API,
-  VERIFY_OTP_API,
   SIGNUP_API,
   LOGIN_API,
-  ADD_ADDRESS,
   FETCH_PROFILE,
-  REFER_CODE
 } = userEndpoints
 
 

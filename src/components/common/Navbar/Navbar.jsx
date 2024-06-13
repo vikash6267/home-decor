@@ -8,7 +8,7 @@ import { NavbarLinks } from "../../../constant/NavbarData";
 import { Link, useNavigate } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
-// import { logout } from "../../../serivces/operations/user";
+import { logout } from "../../../serivces/operations/user";
 import LogoutModal from "./LogoutModal";
 
 function getGreeting() {
@@ -41,7 +41,7 @@ function Navbar({ isOpen, setIsOpen }) {
 
   const logoutHandler = () => {
     console.log("Working Logout");
-    // dispatch(logout(navigate));
+    dispatch(logout(navigate));
   };
   const { greeting, icon } = getGreeting();
 
@@ -103,6 +103,20 @@ function Navbar({ isOpen, setIsOpen }) {
         My Profile
         <FaAngleDoubleDown className=" -rotate-45 text-blue-500" />
       </Link>
+{
+  user?.accountType === "Admin" &&
+  <Link
+        to="admin/dashboard/orders"
+        onClick={() => dispatch(setIsOpen(false))}
+        className="font-semibold flex items-center gap-2 hover:text-blue-600"
+        data-aos="fade-up" data-aos-delay="100"
+      >
+       Dashboard
+        <FaAngleDoubleDown className=" -rotate-45 text-blue-500" />
+      </Link>
+}
+      
+
       <button
         onClick={() => {
           setShowLogoutModal(true);

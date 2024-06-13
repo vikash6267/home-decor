@@ -59,17 +59,6 @@ function Header() {
               </Link>
            
 
-              <div className="" >
-              <Link to="/wishlist" title="Wishlist">
-                {/* <FaRegHeart className="text-lg" /> */}
-                <img
-                    src={heart}
-                    alt=""
-                    className=""
-                    width={30}
-                  />
-              </Link>
-            </div>
            
               <Cart />
 

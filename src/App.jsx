@@ -20,9 +20,15 @@ import ProductDetails from './pages/ProductDetails';
 import AllProduct from './pages/AllProduct';
 import CheckoutForm from './components/core/cart/CheckoutForm';
 import Order from './pages/MyOrder';
+import Dashboard from './pages/Admin/Dashboard/Dashboard';
+import ContactUsForm from './pages/ContactUsForm';
 
-
-
+// Admin 
+import MainDashboard from './pages/Admin/MainDashboard';
+import AddProduct from './pages/Admin/Product/AddProduct';
+import AllProductAdmin from './pages/Admin/Product/AllProduct';
+import AddCategory from './pages/Admin/Product/AddCategory';
+import Orders from './pages/Admin/Product/Orders';
 //API
 import { getAllProduct } from "./serivces/operations/product";
 import { useEffect } from 'react';
@@ -33,6 +39,7 @@ import { setCheckout } from "./redux/slices/paymentSlice";
 function App() {
   const { checkout } = useSelector((state) => state.payment);
   const { token } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.profile);
 
 const dispatch = useDispatch()
   useEffect(()=>{
@@ -46,8 +53,9 @@ const dispatch = useDispatch()
 <Routes >
 
 <Route path="/" element={<Home />} />
-{/* <Route path="/allProduct" element={<AllProduct />} /> */}
+<Route path="/allProduct" element={<AllProduct />} />
 <Route path="product/:productID" element={<ProductDetails />} />
+<Route path="contact" element={<ContactUsForm />} />
 
 
 
@@ -77,6 +85,61 @@ const dispatch = useDispatch()
             </PrivateRoute>
           }
         />
+
+{
+  user?.accountType === "Admin" &&(
+    <Route
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        >
+  <Route
+            path="admin/dashboard/add-product"
+            element={
+              <PrivateRoute>
+              <AddProduct />
+              {/* <AllProductAdmin /> */}
+              </PrivateRoute>
+            }
+          />
+  <Route
+            path="admin/dashboard/add-category"
+            element={
+              <PrivateRoute>
+              <AddCategory />
+              </PrivateRoute>
+            }
+          />
+  <Route
+            path="admin/dashboard/orders"
+            element={
+              <PrivateRoute>
+              <Orders />
+              </PrivateRoute>
+            }
+          />
+  <Route
+            path="admin/dashboard/all-product"
+            element={
+              <PrivateRoute>
+              <AllProductAdmin />
+              </PrivateRoute>
+            }
+          />
+  <Route
+            path="admin/dashboard"
+            element={
+              <PrivateRoute>
+              <MainDashboard />
+              </PrivateRoute>
+            }
+          />
+        /</Route>
+  )
+}
+
 </Routes>
 
 
@@ -94,6 +157,10 @@ const dispatch = useDispatch()
 
         
       )}
+
+
+
+{/* Admin Routes */}
 
 
     </div>

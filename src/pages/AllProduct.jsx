@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import {useSelector } from 'react-redux';
 import { displayMoney } from "../helper/utills";
 import { Link } from 'react-router-dom';
-import { CiSliderHorizontal } from "react-icons/ci";
-import { RxCross2 } from "react-icons/rx";
+
 import { useParams } from "react-router-dom";
 
-import { IoCheckmarkCircleSharp } from "react-icons/io5";
+import Footer from '../components/common/Footer';
 import AOS from "aos";
 import 'aos/dist/aos.css'
 
@@ -41,7 +40,10 @@ function AllProduct({ products }) {
 
 
   return (
-    <div className="min-h-screen  mt-[54px] min-w-[100vw] mx-auto mb-[100px] ">
+   <>
+
+<div className="min-h-screen  mt-[60px] min-w-[100vw] mx-auto mb-[100px] ">
+      <h2 className=' text-center font-bold text-2xl'>All Product </h2>
       <div className='min-h-full '>
         <div className="flex ">
     
@@ -67,8 +69,8 @@ function AllProduct({ products }) {
                 >
                   <div className='flex flex-col gap-3 mt-2'>
                     <div className='h-full min-w-[10rem] overflow-hidden relative'>
-                      <img src={product.images[0].url} alt='' className='object-cover h-full w transition duration-500 ease-in-out transform hover:-translate-y-1' />
-                      <img src={product.images[1].url} alt='' className='object-cover h-full w absolute top-0 left-0 opacity-0 transition duration-500 ease-in-out transform hover:opacity-100' />
+                      <img src={product.images[0]?.url} alt='' className='object-cover h-full w transition duration-500 ease-in-out transform hover:-translate-y-1' />
+                      <img src={product.images[1]?.url} alt='' className='object-cover h-full w absolute top-0 left-0 opacity-0 transition duration-500 ease-in-out transform hover:opacity-100' />
                     </div>
                     <div>
                       <p className='font-montserrat lg:text-lg text-gray-600'>{product.title}</p>
@@ -84,6 +86,8 @@ function AllProduct({ products }) {
         </div>
       </div>
     </div>
+    <Footer />
+   </>
   );
 }
 

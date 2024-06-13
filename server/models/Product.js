@@ -46,11 +46,11 @@ const productSchema = new mongoose.Schema(
         url: String,
       },
     ],
-
     sizes:{
       type: String,
       // required: true,
     }
+
 ,
     ratingAndReviews: [
       {

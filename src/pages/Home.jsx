@@ -5,6 +5,8 @@ import TestSlide from "../components/core/home/Slider";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ProductCard from "../components/core/home/ProductCard";
+import Footer from "../components/common/Footer";
+
 function Home() {
 
 
@@ -53,8 +55,17 @@ function Home() {
     setProduct2(selectedProducts)
   }, [allProduct]);
 
+  if(allProduct.length ===0 ){
+    return (
+      <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
+        <div className="spinner"></div>
+      </div>
+    );
+  }
+
   return (
-    <div className=" mt-[60px]">
+  <>
+      <div className=" mt-[60px]">
       {/* Hero Image */}
       <div>
         <div>
@@ -129,7 +140,7 @@ function Home() {
             
             
               {products &&
-                products?.map((product) => (
+                products2?.map((product) => (
                   <ProductCard key={product._id} products={product} />
                 ))}
             </div>
@@ -137,6 +148,8 @@ function Home() {
 
       
     </div>
+    <Footer />
+  </>
   );
 }
 

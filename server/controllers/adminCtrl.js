@@ -100,9 +100,11 @@ const getMonthWiseOrderIncome = asyncHandler(async (req, res) => {
 
 
   const getAllOrders = asyncHandler(async (req, res) => {
-    const { _id } = req.user;
-    try {
-      const orders = await Order.find().populate("user");
+      try {
+      const orders = await Order.find().populate("user").populate({
+        path: 'orderItems.product',
+        model: 'Product',
+    });
       // .populate("orderItems.product")
       // .populate("orderItems.color");
       res.status(200).json({
@@ -118,8 +120,33 @@ const getMonthWiseOrderIncome = asyncHandler(async (req, res) => {
     }
   });
 
+  
+  const updateOrderStatus = async (req, res) => {
+  const { orderId } = req.body;
+  const { newStatus } = req.body;
+
+  try {
+      const updatedOrder = await Order.findByIdAndUpdate(
+          orderId,
+          {orderStatus: newStatus },
+          { new: true }
+      );
+
+      if (!updatedOrder) {
+          return res.status(404).json({ success: false, message: 'Order not found' });
+      }
+      console.log(updatedOrder)
+
+      res.status(200).json({ success: true, data: updatedOrder });
+  } catch (error) {
+      console.error('Error updating order status:', error);
+      res.status(500).json({ success: false, message: 'Failed to update order status', error: error.message });
+  }
+};
+
   module.exports = {
     getMonthWiseOrderIncome,
     getYearlyTotalOrder,
-    getAllOrders
+    getAllOrders,
+    updateOrderStatus
   };

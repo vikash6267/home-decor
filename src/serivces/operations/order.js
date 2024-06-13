@@ -144,26 +144,6 @@ async function verifyPayment(bodyData, token, navigate, dispatch) {
 
 
 
-  // Send the Payment Success Email
-async function sendPaymentSuccessEmail(response, amount, token) {
-    try {
-      await apiConnector(
-        "POST",
-        SEND_PAYMENT_SUCCESS_EMAIL_API,
-        {
-          orderId: response.razorpay_order_id,
-          paymentId: response.razorpay_payment_id,
-          amount,
-        },
-        {
-          Authorization: `Bearer ${token}`,
-        }
-      )
-    } catch (error) {
-      console.log("PAYMENT SUCCESS EMAIL ERROR............", error)
-    }
-  }
-  
 
     export const getAllOrder = () => async (token) => {
       const toastId = toast.loading("Loading...");

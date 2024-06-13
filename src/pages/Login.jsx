@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { login } from '../serivces/operations/user'
 import { useNavigate } from 'react-router-dom'
-
+import Footer from '../components/common/Footer'
 function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -14,7 +14,8 @@ function Login() {
   }
 
   return (
-    <div className='flex justify-center items-center min-h-screen bg-gray-100'>
+   <>
+     <div className='flex justify-center items-center min-h-screen bg-gray-100'>
       <div className='w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg'>
         <div className='text-center text-2xl font-bold text-gray-900'>
           Login
@@ -59,6 +60,8 @@ function Login() {
         </form>
       </div>
     </div>
+    <Footer></Footer>
+   </>
   )
 }
 

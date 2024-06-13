@@ -11,33 +11,6 @@ const crypto = require("crypto")
 const Coupon = require("../models/Coupon")
 const User = require("../models/User")
 
-// const capturePayment = async (req, res) => {
-//   const { products } = req.body;
-// try{
-
-//     const option = {
-//         amount: amount * 100,
-//         currency: "INR",
-//         receipt: Math.random(Date.now()).toString(),
-//       };
-   
-//         // Initiate the payment using Razorpay
-//         const paymentResponse = await instance.orders.create(option)
-//         console.log(paymentResponse)
-//         res.json({
-//           success: true,
-//           data: paymentResponse,
-//         })
-//       } catch (error) {
-//         console.log(error)
-//         res
-//           .status(500)
-//           .json({ success: false, message: "Could not initiate order." })
-//       }
-
-
-// };
-
 
 
 
@@ -297,6 +270,8 @@ message: `Fetch Orders Successfully`,
     })
   }
 }
+
+
 
 module.exports = {
     capturePayment,

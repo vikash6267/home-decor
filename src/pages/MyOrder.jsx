@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAllOrder } from "../serivces/operations/order";
 import { useSelector } from "react-redux";
 import { FaTruck, FaMoneyBillAlt } from "react-icons/fa";
-
+import Footer from "../components/common/Footer";
 function Order() {
   const [orders, setOrders] = useState([]);
   const { token } = useSelector((state) => state.auth);
@@ -30,7 +30,8 @@ function Order() {
   };
 
   return (
-    <div className="flex flex-col items-center px-4">
+ <div>
+     <div className="flex flex-col items-center px-4">
       <div className="w-full flex justify-center text-2xl font-bold p-4 border-b-2 mb-6">
         <h2>Your Orders</h2>
       </div>
@@ -96,6 +97,9 @@ function Order() {
         </div>
       )}
     </div>
+
+    <Footer></Footer>
+ </div>
   );
 }
 

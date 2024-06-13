@@ -14,7 +14,7 @@ const {
 } = require("../controllers/couponCtrl")
 
 
-router.post("/create",createCoupon)
+router.post("/create",auth,isAdmin,createCoupon)
 router.post("/get",getCouponByName)
 
 

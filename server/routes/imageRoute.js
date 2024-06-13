@@ -15,7 +15,7 @@ const {
 }=require("../controllers/imageCtrl")
 
 router.post("/upload",imageUpload)
-router.post("/multi",uploadPhoto.array("images", 10),uploadImages)
+router.post("/multi",uploadImages)
 // export all router
 module.exports = router
 

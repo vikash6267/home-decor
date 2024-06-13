@@ -12,7 +12,7 @@ import { MdOutlineLocalShipping } from "react-icons/md";
 import {addToCart} from "../redux/slices/cartSlice"
 import { useDispatch, useSelector } from "react-redux";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-
+import Footer from "../components/common/Footer";
 
 function ProductDetails() {
   const [product, setProduct] = useState(null);
@@ -144,7 +144,8 @@ const toggleModal = () => {
   
 
   return (
-    <div className="prodcutDetialsContainer min-w-screen ">
+<>
+<div className="prodcutDetialsContainer min-w-screen ">
       <section className="section" id="product_details">
         <div className="product_container">
           <div className="wrapper prod_details_wrapper">
@@ -275,6 +276,8 @@ const toggleModal = () => {
 
    
     </div>
+    <Footer></Footer>
+</>
   );
 }
 

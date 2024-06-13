@@ -1,8 +1,12 @@
-const {uploadImageToCloudinary,cloudinaryUploadImg} = require("../utills/imageUploader")
+const {uploadImageToCloudinary} = require("../utills/imageUploader")
+const fs = require('fs');
 
 exports.imageUpload = async(req,res)=>{
     try{
-    const thumbnail = req.files.file  
+    const {thumbnail} = req.files 
+    console.log(thumbnail)
+
+
 
     const thumbnailImage = await uploadImageToCloudinary(
         thumbnail,
@@ -27,29 +31,30 @@ exports.imageUpload = async(req,res)=>{
 
 exports.uploadImages = async (req, res) => {
   try {
-    console.log("enter the uplooad")
-
-    const uploader = (path) => cloudinaryUploadImg(path, "images");
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return res.status(400).json({ success: false, message: 'No files were uploaded.' });
+    }
+console.log(req.files)
+    const files = req.files.thumbnail; // Assumes files are uploaded with the name 'thumbnail'
     const urls = [];
-    const files = req.files;
 
-    if (!files || files.length === 0) {
-      return res.status(400).json({ status: 'fail', message: 'No files uploaded' });
-    }
-    console.log("Images",files)
-    for (const file of files) {
-      const { path } = file;
-      const newpath = await uploader(path);
-      console.log(newpath);
+    // Ensure files is an array
+    const fileArray = Array.isArray(files) ? files : [files];
+
+    // Upload each file to Cloudinary
+    for (const file of fileArray) {
+      const newpath = await uploadImageToCloudinary(file, process.env.FOLDER_NAME);
       urls.push(newpath);
-      fs.unlinkSync(path);
+      fs.unlinkSync(file.tempFilePath); // Delete the temp file
     }
-    const images = urls.map((file) => {
-      return file;
+
+    res.status(200).json({
+      success: true,
+      message: 'Images uploaded successfully',
+      images: urls
     });
-    res.json(images);
   } catch (error) {
-    console.log("image upload error", error)
-    throw new Error(error);
+    console.error('Image upload error:', error);
+    res.status(500).json({ success: false, message: 'Image upload failed', error });
   }
 };

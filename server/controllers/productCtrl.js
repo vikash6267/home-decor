@@ -9,15 +9,18 @@ exports.createProduct = async (req, res) => {
     const { title, description, price, category, highPrice, quantity,sizes, images } =
       req.body;
 
+
+const imagesArray = JSON.parse(req.body.images);
+
+
     if (
       !title ||
       !description ||
       !price ||
       !category ||
       !sizes ||
-      ! highPrice ||
       !quantity ||
-      !images
+      !imagesArray
     ) {
       return res.status(400).json({
         success: false,
@@ -44,7 +47,7 @@ exports.createProduct = async (req, res) => {
       highPrice,
       sizes,
       quantity,
-      images,
+      images:imagesArray,
     });
 
     res.status(200).json({
@@ -111,4 +114,25 @@ exports.getProductDetails = async(req, res) =>{
     })
   }
 }
+
+
+exports.deleteProduct = async (req, res) => {
+  try {
+    console.log(req.body)
+    const { id } = req.body;
+
+    // Find the product by ID and delete it
+    const deletedProduct = await Product.findByIdAndDelete(id);
+
+    if (!deletedProduct) {
+      return res.status(404).json({ success: false, message: "Product not found" });
+    }
+
+    return res.status(200).json({ success: true, message: "Product deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, message: "Failed to delete product", error: error.message });
+  }
+};
+
 

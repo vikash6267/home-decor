@@ -1,26 +1,13 @@
 // const BASE_URL = process.env.REACT_APP_BASE_URL
-const BASE_URL = "https://home-decor-e-commerce.onrender.com/api/v1"
-// const BASE_URL = "http://localhost:4000/api/v1"
+// const BASE_URL = "https://home-decor-e-commerce.onrender.com/api/v1"
+const BASE_URL = "http://localhost:4000/api/v1"
 
 // ??USER APIS
 export const userEndpoints = {
     LOGIN_API : BASE_URL + "/user/login",
     SIGNUP_API : BASE_URL +"/user/signup",
     FETCH_PROFILE : BASE_URL + "/user/fetchMyProfile",
-    SEND_OTP_API : BASE_URL +"/user/sentotp",
-    VERIFY_OTP_API : BASE_URL +"/user/verifyotp",
-
-    // Address
-    GET_ADDRESS : BASE_URL +"/address/get",
-    ADD_ADDRESS : BASE_URL +"/address/add",
-    DELETE_ADDRESS : BASE_URL +"/address/delete",
-    UPDATE_ADDRESS : BASE_URL +"/address/update",
-    REFER_CODE : BASE_URL +"/user/refer",
-
-    
-
-
-
+    CONTACT_US_API: BASE_URL + "/user/contact",
 
 }
 
@@ -31,18 +18,7 @@ export const productEndpoints = {
      GET_PRODUCT_DETAILS : BASE_URL + "/product/getProductDetails",
 
 
-
-     //WishList 
-     ADD_TO_WISHLIST : BASE_URL + "/wishlist/addtowish",
-     REMOVE_TO_WISHLIST : BASE_URL + "/wishlist/removetowish",
-     GET_WISHLIST : BASE_URL + "/wishlist/getWishlist",
-
-
-
-
-
-
-     //COUPON APIS 
+      //COUPON APIS 
      GET_COUPON : BASE_URL + "/coupon/get"
      
   }
@@ -63,3 +39,33 @@ export const productEndpoints = {
     
   }
   
+
+
+
+
+  // ADMIN APIS 
+
+  export const adminEndPoints = {
+    ADD_PRODUCT_API : BASE_URL + "/product/create",
+    EDIT_PRODUCT_API : BASE_URL + "/product/create",
+    DELETE_PRODUCT_API : BASE_URL + "/product/delete",
+
+
+
+    //Category
+    ADD_CATEGORY_API : BASE_URL + "/product/createCategory",
+    EDIT_CATEGORY_API : BASE_URL + "/product/editCategory",
+    DELTE_CATEGORY_API : BASE_URL + "/product/deleteCategory",
+    GET_ALL_CATEGORY_API : BASE_URL + "/product/showAllCategories",
+
+
+    IMAGE_UPLOAD : BASE_URL + "/image/multi",
+
+
+    //Order
+    GET_ALL_ORDER : BASE_URL + "/product/adminGetOrder",
+    UPDATE_ORDER : BASE_URL + "/product/updateOrder"
+
+
+   
+  }
