@@ -19,7 +19,7 @@ const orderRoutes = require("./routes/orderRoutes")
 dotenv.config();
 
 // Setting up port number
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3010;
 // Connecting to database
 database.connect();
 
