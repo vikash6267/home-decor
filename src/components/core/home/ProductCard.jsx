@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { displayMoney } from "../../../helper/utills";
 import "./ProductCard.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../redux/slices/cartSlice";
-import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -14,17 +13,9 @@ function ProductCard({ products }) {
     AOS.init({ duraction: 2000, once: true });
   }, []);
   const { _id, title, description, price, highPrice, images } = products;
-  const truncatedDescription =
-    description.length > 25
-      ? description.substring(0, 25) + "..."
-      : description;
 
-  const { cart } = useSelector((state) => state.cart);
 
-  const dispatch = useDispatch();
-  const handleAddToCart = (products) => {
-    dispatch(addToCart({ products }));
-  };
+
 
   const newPrice = displayMoney(price);
   const oldPrice = displayMoney(highPrice);

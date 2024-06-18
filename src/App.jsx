@@ -38,7 +38,6 @@ import { setCheckout } from "./redux/slices/paymentSlice";
 
 function App() {
   const { checkout } = useSelector((state) => state.payment);
-  const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
 
 const dispatch = useDispatch()

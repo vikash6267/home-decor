@@ -1,6 +1,5 @@
 // CheckoutForm.js
 import React, { useState } from 'react';
-import { FaCheck } from "react-icons/fa"
 import { useSelector } from "react-redux"
 import { displayMoney , calculateTotal} from '../../../helper/utills';
 import { FiShoppingCart } from "react-icons/fi";
@@ -11,7 +10,7 @@ import Payment from './Payment';
 import { Link } from 'react-router-dom';
 
 const CheckoutForm = ({handleClose}) => {
-  const { cart, total, totalItems, isCartOpen } = useSelector((state) => state.cart);
+  const { cart, total} = useSelector((state) => state.cart);
   const [isOpen, setIsOpen] = useState(true);
   const [payable,setPayable] = useState(total)
   //Coupon
@@ -31,17 +30,7 @@ const CheckoutForm = ({handleClose}) => {
 
     const { step } = useSelector((state) => state.payment)
 
-    const steps = [
-      {
-        id: 1,
-        title: "Shipping Address",
-      },
-      {
-        id: 2,
-        title: "Payment",
-      },
-      
-    ]
+    
 
 const handleCoupon = async() =>{
 

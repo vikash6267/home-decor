@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import {increanQuantity,decreaseQuantity} from "../../../redux/slices/cartSlice"
 import { useDispatch } from 'react-redux';

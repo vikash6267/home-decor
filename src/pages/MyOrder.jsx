@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllOrder } from "../serivces/operations/order";
 import { useSelector } from "react-redux";
-import { FaTruck, FaMoneyBillAlt } from "react-icons/fa";
+import {  FaMoneyBillAlt } from "react-icons/fa";
 import Footer from "../components/common/Footer";
 function Order() {
   const [orders, setOrders] = useState([]);

@@ -3,11 +3,15 @@ import { useDispatch } from 'react-redux'
 import { login } from '../serivces/operations/user'
 import { useNavigate } from 'react-router-dom'
 import Footer from '../components/common/Footer'
+
+
 function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+
   const handleOnSubmit = (e) => {
     e.preventDefault()
     dispatch(login(email, password, () => navigate('/dashboard'))) // Assuming '/dashboard' is the route to redirect after successful login

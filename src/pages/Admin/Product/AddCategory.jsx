@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { createCategory, fetchCategory } from "../../../serivces/operations/admin";
-import { FaTrash } from 'react-icons/fa';
 import { useSelector } from "react-redux";
 
 function AddCategory() {

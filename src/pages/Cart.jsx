@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { displayMoney, calculateTotal } from "../helper/utills";
+import { displayMoney } from "../helper/utills";
 import { BsCartX } from "react-icons/bs";
 import EmptyView from "../components/core/cart/EmptyView";
 import CartItems from "../components/core/cart/CartItems";
@@ -16,7 +16,6 @@ function Cart() {
     (state) => state.cart
   );
   const cartQuantity = cart.length;
-  const calculateCartTotal = total;
  
 
   const ref = useRef(null);
@@ -24,10 +23,7 @@ function Cart() {
 
   const dispatch = useDispatch();
 
-  // total discount
-  const cartDiscount = cart.map((item) => {
-    return (item.product.price - item.product.highPrice) * item.quantity;
-  });
+
 
 
   // final total amount

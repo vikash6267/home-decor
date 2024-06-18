@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, useLocation, matchPath,useNavigate } from "react-router-dom";
+import { NavLink, useLocation, matchPath } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
 import { FaBars } from "react-icons/fa";

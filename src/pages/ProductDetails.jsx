@@ -11,37 +11,21 @@ import { IoIosAdd,IoIosRemove  } from "react-icons/io";
 import { MdOutlineLocalShipping } from "react-icons/md";
 import {addToCart} from "../redux/slices/cartSlice"
 import { useDispatch, useSelector } from "react-redux";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
 import Footer from "../components/common/Footer";
 
 function ProductDetails() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(false);
   const { productID } = useParams();
-  const [selectedSize, setSelectedSize] = useState(null);
   const [previewImg, setPreviewImg] = useState("");
   const { handleActive, activeClass } = useActive(0);
     const dispatch = useDispatch()
   const [quantity, setQuantity] = useState(1);
-  const [wishlistLoading, setWishlistLoading] = useState(false);
-const {wishlistProduct} = useSelector((state)=>state.wishlist)
   
-const {  token } = useSelector((state) => state.auth);
 const { allProduct } = useSelector((state) => state.product);
 
 
 
-const [showModal, setShowModal] = useState(false);
-
-// Function to handle showing/hiding the modal
-const toggleModal = () => {
-  setShowModal(!showModal);
-};
-//
-
-// useEffect(()=>{
-// console.log("Redux Wishlist",wishlistProduct)
-// },[])
 
 
 
@@ -49,10 +33,7 @@ const toggleModal = () => {
 
 
   
-  const handleSizeClick = (size) => {
-    setSelectedSize(size === selectedSize ? null : size);
-    setShowModal(false);
-  };
+
   const handlePreviewImg = (images, i) => {
     setPreviewImg(images[i].url);
     handleActive(i);
@@ -65,7 +46,7 @@ const toggleModal = () => {
    const handleAddItem = () => {
 
     
-    dispatch(addToCart({products:product, quantity,size:selectedSize}));
+    dispatch(addToCart({products:product}));
   
   };
 

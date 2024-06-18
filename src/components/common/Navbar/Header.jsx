@@ -7,17 +7,12 @@ import Cart from "../../../pages/Cart";
 import { handleIsCartOpen } from "../../../redux/slices/cartSlice";
 import Navbar from "./Navbar";
 import { handleIsMenuOpen } from "../../../redux/slices/product";
-import { FaUserAlt } from "react-icons/fa";
-import { FaRegHeart } from "react-icons/fa";
-//Images
+
 import user from "../../../assests/gif/user.gif"
 import cart from "../../../assests/gif/cart.gif"
-import heart from "../../../assests/gif/heart.gif"
 
 
 function Header() {
-  const { token } = useSelector((state) => state.auth);
-  const { totalItems, isCartOpen } = useSelector((state) => state.cart);
   const { isMenuOpen } = useSelector((state) => state.product);
   const dispatch = useDispatch();
 

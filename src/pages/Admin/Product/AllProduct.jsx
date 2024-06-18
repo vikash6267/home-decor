@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { FaTrash } from "react-icons/fa";
 import { deleteProduct } from "../../../serivces/operations/admin";
 
 function AllProduct() {
