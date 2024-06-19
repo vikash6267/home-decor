@@ -112,32 +112,22 @@ exports.signup = async (req, res) => {
 
 
 
-    console.log(user)
- 
-    let token   // Log in the user after signup
-try {
- token = jwt.sign(
-    { email: user.email, id: user._id, role: user.accountType },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: "24h",
-    }
-  );
-} catch (error) {
-  console.error(error);
-  return res.status(500).json({
-    success: false,
-    message: `jwt ${error}`,
-  });
-  
-}
+    // console.log(user)
+    // Log in the user after signup
+    const token = jwt.sign(
+      { email: user.email, id: user._id, role: user.accountType },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "24h",
+      }
+    );
 
     // Set cookie for token
-    // const options = {
-    //   expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-    //   httpOnly: true,
-    // };
-    // res.cookie("token", token, options);
+    const options = {
+      expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+    };
+    res.cookie("token", token, options);
 
     // Return success response
     return res.status(200).json({
@@ -203,7 +193,7 @@ exports.login = async (req, res) => {
         expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
         httpOnly: true,
       }
-      res.status(200).json({
+      res.cookie("token", token, options).status(200).json({
         success: true,
         token,
         user,
