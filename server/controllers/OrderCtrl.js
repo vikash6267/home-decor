@@ -31,15 +31,12 @@ console.log("enter payment")
       let product;
 
       try {
-        // Find the product by its ID
         product = await Product.findById(product_id);
 
-        // If the product is not found, return an error
         if (!product) {
           return res.status(200).json({ success: false, message: "Could not find the Product" });
         }
 
-        // Add the price of the product to the total amount
         total_amount += product.price * item.quantity;
       } catch (error) {
         console.log(error);
@@ -62,7 +59,7 @@ console.log("enter payment")
   const options = {
     amount: total_amount * 100,
     currency: "INR",
-    receipt: Math.random(Date.now()).toString(),
+    // receipt: Math.random(Date.now()).toString(),
   }
 
   try {

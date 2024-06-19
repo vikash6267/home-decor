@@ -20,7 +20,7 @@ const {
 // router.post("/verifyPayment", auth, isCustomre, paymentVerification)
 // router.get("/get", auth, isCustomre, getAllOrder)
 
-router.post("/capturePayment",auth, capturePayment)
+router.post("/",auth, capturePayment)
 router.post("/verifyPayment",auth, paymentVerification)
 router.get("/get", auth, getAllOrder)
 
