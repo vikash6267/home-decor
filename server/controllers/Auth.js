@@ -112,15 +112,26 @@ exports.signup = async (req, res) => {
 
 
 
-    // console.log(user)
+    console.log(user)
+    console.log("enter")
     // Log in the user after signup
-    const token = jwt.sign(
-      { email: user.email, id: user._id, role: user.accountType },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: "24h",
-      }
-    );
+    let token;
+    try {
+      token = jwt.sign(
+        { email: user.email, id: user._id, role: user.accountType },
+        process.env.JWT_SECRET,
+        { expiresIn: "24h" }
+      );
+    } catch (error) {
+      console.error("JWT token generation error:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Failed to generate authentication token",
+      });
+    }
+    console.log("end")
+
+
 
     // Set cookie for token
     const options = {
@@ -181,7 +192,7 @@ exports.login = async (req, res) => {
         { email: user.email, id: user._id, role: user.accountType },
         process.env.JWT_SECRET,
         {
-          expiresIn: "24h",
+          expiresIn: "24h"
         }
       )
 
