@@ -107,7 +107,7 @@ const dispatch = useDispatch()
             path="admin/dashboard/add-category"
             element={
               <PrivateRoute>
-              <AddCategory />
+                  <AddCategory />
               </PrivateRoute>
             }
           />

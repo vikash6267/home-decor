@@ -36,16 +36,7 @@ function Home() {
     return productsCopy.slice(0, 4);
   };
 
-  // const dispatch = useDispatch()
-  // const fetchSubLinks = async () => {
-  //   (async () => {
-  //     const res = await (getAllProduct());
-  //     if (res) {
-  //       setProduct(res);
-  //       console.log(products);
-  //     }
-  //   })();
-  // };
+
 
   useEffect(() => {
     // fetchSubLinks();

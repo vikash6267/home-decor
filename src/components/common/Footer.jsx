@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaFacebookF,FaWhatsapp,FaInstagram   } from "react-icons/fa";
-
+import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <footer className="relative bg-blue-200 pt-8 pb-6 mt-[100px]">
@@ -38,6 +38,9 @@ const Footer = () => {
                   </li>
                   <li>
                     <a href="https://home-decore.vercel.app/contact" className="text-blue-600 hover:text-blue-800 font-semibold block pb-2 text-sm">Contact Us</a>
+                  </li>
+                  <li>
+                    <Link to="/admin/dashboard/add-product" className="text-blue-600 hover:text-blue-800 font-semibold block pb-2 text-sm">Admin Route</Link>
                   </li>
                 </ul>
               </div>
